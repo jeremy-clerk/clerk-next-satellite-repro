@@ -40,8 +40,9 @@ export default clerkMiddleware(
         });
 
         const prefix = (sessionClaims?.subdomain && sessionClaims?.subdomain !== '') ? sessionClaims?.subdomain : null
+        const rootDomain = (sessionClaims?.root && sessionClaims?.root !== '') ? sessionClaims?.root : null
 
-        const userCustomDomain = prefix ? (prefix as string).concat(".",(process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string)) : null
+        const userCustomDomain = prefix ? (prefix as string).concat(".",(rootDomain as string) || (process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string)) : null
 
         const nextDomain = `${
             process.env.NODE_ENV === "development" ||
@@ -83,7 +84,7 @@ export default clerkMiddleware(
         return {
             isSatellite: isSatellite ?? undefined,
             domain: isSatellite
-                ? `https://${process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN}`
+                ? `https://${domain}`
                 : `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
         };
     },
