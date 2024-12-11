@@ -22,6 +22,7 @@ const isPublicRoute = createRouteMatcher([
 export default clerkMiddleware(
     async (auth, request) => {
         if (isPublicRoute(request)) return;
+
         await auth.protect({
             unauthenticatedUrl: new URL("/login", `https://`.concat(process.env.NEXT_PUBLIC_ROOT_DOMAIN as string)).toString()
         });

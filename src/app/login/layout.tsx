@@ -9,7 +9,6 @@ export default async function RootLayout({
 
 	return (
 		<ClerkProvider
-			allowedRedirectOrigins={[process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string]}
 			afterSignOutUrl={(process.env.NEXT_PUBLIC_ROOT_DOMAIN as string).concat("/login")}
 		>
 			<html lang="en">
