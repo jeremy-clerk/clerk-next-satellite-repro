@@ -22,9 +22,7 @@ export default async function RootLayout({
 	return (
 		<ClerkProvider
 			allowedRedirectOrigins={[satelliteDomain]}
-			// does not work: Error: Functions cannot be passed directly to Client Components unless you explicitly expose it by marking it with "use server"
-			// domain={(url) => url.host}
-			domain={`https://${host}`}
+			domain={`${host}`}
 			isSatellite={isSatellite}
 			dynamic
 		>
