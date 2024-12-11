@@ -39,7 +39,7 @@ export default clerkMiddleware(
 
         const prefix = (sessionClaims?.subdomain && sessionClaims?.subdomain !== '') ? sessionClaims?.subdomain : null
 
-        const userCustomDomain = prefix ? (prefix as string).concat("/",(process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string)) : null
+        const userCustomDomain = prefix ? (prefix as string).concat(".",(process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string)) : null
 
         const nextDomain = `${
             process.env.NODE_ENV === "development" ||
