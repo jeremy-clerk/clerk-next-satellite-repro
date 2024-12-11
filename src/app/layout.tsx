@@ -1,29 +1,15 @@
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
 import "./globals.css";
-import { headers } from "next/headers";
 
 export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
-	const headersList = await headers();
-	const host =
-		headersList.get("x-forwarded-host") ?? process.env.NEXT_PUBLIC_ROOT_DOMAIN!;
-	const isSatellite = !host.includes(process.env.NEXT_PUBLIC_ROOT_DOMAIN!);
-
-	console.log("root layout", {
-		host,
-		isSatellite,
-		rootDomain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
-	});
 
 	return (
 		<ClerkProvider
 			allowedRedirectOrigins={[process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string]}
-			domain={isSatellite ? process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string : process.env.NEXT_PUBLIC_ROOT_DOMAIN as string}
-			isSatellite={isSatellite}
-			dynamic
 		>
 			<html lang="en">
 				<body>
