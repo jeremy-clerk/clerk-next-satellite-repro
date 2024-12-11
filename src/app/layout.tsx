@@ -8,6 +8,7 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	const satelliteRoot = process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN
 	const headersList = await headers();
 	const host =
 		headersList.get("x-forwarded-host") ?? process.env.NEXT_PUBLIC_ROOT_DOMAIN!;
@@ -19,11 +20,13 @@ export default async function RootLayout({
 		rootDomain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
 	});
 
+	const clerkDomain = satelliteRoot && host.includes(satelliteRoot) ? satelliteRoot : process.env.NEXT_PUBLIC_ROOT_DOMAIN as string
+
 	//Clerk was trying to load js from clerk.https//<host>.app/npm which was failing. Changed to just host to resolve this.
 	return (
 		<ClerkProvider
 			allowedRedirectOrigins={[satelliteDomain]}
-			domain={`${host}`}
+			domain={clerkDomain}
 			isSatellite={isSatellite}
 			dynamic
 		>
