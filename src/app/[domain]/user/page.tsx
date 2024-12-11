@@ -9,7 +9,7 @@ export default async function Page(){
          <h1>
              Hello, {user?.firstName}
          </h1>
-             <Link href={"/dashboard"} >Dashboard</Link>
+             <Link href={"/dashboard"} >Go To /dashboard</Link>
          </div>
      )
 }
