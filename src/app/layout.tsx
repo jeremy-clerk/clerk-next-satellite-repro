@@ -21,7 +21,7 @@ export default async function RootLayout({
 	});
 
 	// if accessing a subdomain of the satellite domain configured in clerk handshake doesn't work
-	const clerkDomain = satelliteRoot && host.includes(satelliteRoot) ? satelliteRoot : host
+	const clerkDomain = satelliteRoot && host.includes(satelliteRoot) ? satelliteRoot : process.env.NEXT_PUBLIC_ROOT_DOMAIN as string
 
 	//Clerk was trying to load js from clerk.https//<host>.app/npm which was failing. Changed to just host to resolve this.
 	return (
