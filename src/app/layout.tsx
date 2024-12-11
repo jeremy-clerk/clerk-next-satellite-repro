@@ -19,6 +19,7 @@ export default async function RootLayout({
 		rootDomain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
 	});
 
+	//Clerk was trying to load js from clerk.https//<host>.app/npm which was failing. Changed to just host to resolve this.
 	return (
 		<ClerkProvider
 			allowedRedirectOrigins={[satelliteDomain]}

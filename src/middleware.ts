@@ -18,17 +18,18 @@ const isPublicRoute = createRouteMatcher([
     "/api(.*)",
 ]);
 
-// INSERT YOUR CLERK USER ID HERE
-// Normally we would get this info from the database.
-// For this example, we'll just mock it and say we only have one satellite domain.
-// In our real implementation, there are dozens of users with custom domains and we can only tell as soon as the user is signed in.
+// jeremy+test2@clerk.dev
+// jeremy+test3@clerk.dev
 const mockUsersWithCustomDomains = [
-    "user_2q4fC1shj1XId8oiGGDilx2xg2Z",
-    "user_2q4f8eJwLkaRCpNcCJAnijd1ZnL",
+    "user_2q4lxzh3QGkT9PLTgKHAjCZGfg7",
+    "user_2q4lvzQflCS9ymoxwhriLa9wnH4",
 ];
-// const mockUsersWithCustomDomains = [""];
 
-export const satelliteDomain = "satellite.stbrd.com";
+// main domain configured in clerk: devsuccess.app
+// satellite domain configured in clerk: devsuccess.dev
+// added both devsuccess.dev and satellite.devsuccess.dev to Vercel for good measure
+
+export const satelliteDomain = "devsuccess.dev";
 
 const mockGetUserCustomDomain = (userId: string) => {
     if (mockUsersWithCustomDomains.includes(userId)) {
