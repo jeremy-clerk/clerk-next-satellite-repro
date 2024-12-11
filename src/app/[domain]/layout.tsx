@@ -23,7 +23,6 @@ export default async function RootLayout({
             allowedRedirectOrigins={[process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string]}
             domain={isSatellite ? process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string : process.env.NEXT_PUBLIC_ROOT_DOMAIN as string}
             isSatellite={isSatellite}
-            dynamic
         >
             <html lang="en">
             <body>
