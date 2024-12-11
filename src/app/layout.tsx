@@ -1,6 +1,5 @@
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
 import "./globals.css";
-import { satelliteDomain } from "@/middleware";
 import { headers } from "next/headers";
 
 export default async function RootLayout({
@@ -19,10 +18,9 @@ export default async function RootLayout({
 		rootDomain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
 	});
 
-	//Clerk was trying to load js from clerk.https//<host>.app/npm which was failing. Changed to just host to resolve this.
 	return (
 		<ClerkProvider
-			allowedRedirectOrigins={[satelliteDomain]}
+			allowedRedirectOrigins={[process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string]}
 			domain={isSatellite ? process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string : process.env.NEXT_PUBLIC_ROOT_DOMAIN as string}
 			isSatellite={isSatellite}
 			dynamic

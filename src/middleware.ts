@@ -18,32 +18,13 @@ const isPublicRoute = createRouteMatcher([
     "/api(.*)",
 ]);
 
-// jeremy+test2@clerk.dev
-// jeremy+test3@clerk.dev
-const mockUsersWithCustomDomains = [
-    "user_2q4lxzh3QGkT9PLTgKHAjCZGfg7",
-    "user_2q4lvzQflCS9ymoxwhriLa9wnH4",
-];
-
-// main domain configured in clerk: devsuccess.app
-// satellite domain configured in clerk: devsuccess.dev
-// added both devsuccess.dev and satellite.devsuccess.dev to Vercel for good measure
-
-export const satelliteDomain = "satellite.devsuccess.dev";
-
-const mockGetUserCustomDomain = (userId: string) => {
-    if (mockUsersWithCustomDomains.includes(userId)) {
-        return satelliteDomain;
-    }
-    return null;
-};
 
 export default clerkMiddleware(
     async (auth, request) => {
         if (isPublicRoute(request)) return;
         await auth.protect();
 
-        const { userId, redirectToSignIn } = await auth();
+        const { userId, redirectToSignIn, sessionClaims} = await auth();
 
         if (!userId) return redirectToSignIn();
 
@@ -56,7 +37,7 @@ export default clerkMiddleware(
             searchParams,
         });
 
-        const userCustomDomain = mockGetUserCustomDomain(userId);
+        const userCustomDomain = (sessionClaims?.subdomain && sessionClaims?.subdomain !== '') ? sessionClaims?.subdomain : null
 
         const nextDomain = `${
             process.env.NODE_ENV === "development" ||
