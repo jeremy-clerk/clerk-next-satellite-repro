@@ -1,5 +1,5 @@
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
-import "./globals.css";
+import "../globals.css";
 
 export default async function RootLayout({
 	children,
