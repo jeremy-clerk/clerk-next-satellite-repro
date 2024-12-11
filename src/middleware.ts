@@ -29,7 +29,7 @@ const mockUsersWithCustomDomains = [
 // satellite domain configured in clerk: devsuccess.dev
 // added both devsuccess.dev and satellite.devsuccess.dev to Vercel for good measure
 
-export const satelliteDomain = "devsuccess.dev";
+export const satelliteDomain = "satellite.devsuccess.dev";
 
 const mockGetUserCustomDomain = (userId: string) => {
     if (mockUsersWithCustomDomains.includes(userId)) {
