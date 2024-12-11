@@ -23,7 +23,7 @@ export default async function RootLayout({
 	return (
 		<ClerkProvider
 			allowedRedirectOrigins={[satelliteDomain]}
-			domain={isSatellite ? process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN : undefined}
+			domain={isSatellite ? process.env.NEXT_PUBLIC_SATELLITE_ROOT_DOMAIN as string : process.env.NEXT_PUBLIC_ROOT_DOMAIN as string}
 			isSatellite={isSatellite}
 			dynamic
 		>
