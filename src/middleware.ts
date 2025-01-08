@@ -24,7 +24,7 @@ export default clerkMiddleware(
         if (isPublicRoute(request)) return;
 
         if (/\/clerk_\d{13,20}/.test(request.url)) {
-            return NextResponse.next();
+            return;
         }
 
         await auth.protect({
