@@ -23,6 +23,10 @@ export default clerkMiddleware(
     async (auth, request) => {
         if (isPublicRoute(request)) return;
 
+        if (/\/clerk_\d{13,20}/.test(request.url)) {
+            return NextResponse.next();
+        }
+
         await auth.protect({
             unauthenticatedUrl: new URL("/login", `https://`.concat(process.env.NEXT_PUBLIC_ROOT_DOMAIN as string)).toString()
         });
@@ -32,13 +36,6 @@ export default clerkMiddleware(
         if (!userId) return redirectToSignIn();
 
         const { path, domain, fullPath, searchParams } = parse(request);
-
-        console.log({
-            domain,
-            path,
-            fullPath,
-            searchParams,
-        });
 
         const prefix = (sessionClaims?.subdomain && sessionClaims?.subdomain !== '') ? sessionClaims?.subdomain : null
         const rootDomain = (sessionClaims?.root && sessionClaims?.root !== '') ? sessionClaims?.root : null
